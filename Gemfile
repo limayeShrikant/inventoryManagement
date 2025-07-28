@@ -34,6 +34,7 @@ gem 'devise', '~> 4.9', '>= 4.9.4'
 gem 'bootstrap', '~> 4.0.0'
 gem 'jquery-rails'
 gem 'pundit', '~> 2.5'
+gem 'cocoon', '~> 1.2', '>= 1.2.15'
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
 

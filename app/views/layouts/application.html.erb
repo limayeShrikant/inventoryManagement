@@ -10,6 +10,7 @@
 </head>
 
 <body>
+
     <div class="user-nav">
         <% if user_signed_in? %>
         Signed in as: <strong><%= current_user.user_firstname %></strong> |
@@ -20,9 +21,11 @@
         <%= link_to "Login", new_user_session_path %>
         <% end %>
     </div>
-    <p class="notice"><%= notice %></p>
-    <p class="alert"><%= alert %></p>
-    <%= yield %>
+    <div class="container">
+        <p class="notice"><%= notice %></p>
+        <p class="alert"><%= alert %></p>
+        <%= yield %>
+    </div>
 </body>
 
 </html>

@@ -1,0 +1,20 @@
+<%= form_for purchase_order do |f| %>
+<div class="field">
+    <%= f.label :supplier_id %>
+    <%= f.collection_select :supplier_id, Supplier.all, :id, :name, prompt: true %>
+</div>
+
+<h3>Line Items</h3>
+<div id="line-items">
+    <%= f.fields_for :line_items do |line_item_form| %>
+    <%= render 'line_item_fields', f: line_item_form %>
+    <% end %>
+    <div class="links">
+        <%= link_to_add_association 'Add Item', f, :line_items, class: 'btn btn-primary' %>
+    </div>
+</div>
+
+<div class="actions">
+    <%= f.submit %>
+</div>
+<% end %>
