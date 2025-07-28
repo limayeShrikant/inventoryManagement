@@ -10,10 +10,20 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20250728053455) do
+ActiveRecord::Schema.define(version: 20250728072138) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "line_items", force: :cascade do |t|
+    t.bigint "product_id"
+    t.bigint "purchase_order_id"
+    t.integer "quantity"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["product_id"], name: "index_line_items_on_product_id"
+    t.index ["purchase_order_id"], name: "index_line_items_on_purchase_order_id"
+  end
 
   create_table "products", force: :cascade do |t|
     t.string "name"
@@ -23,6 +33,15 @@ ActiveRecord::Schema.define(version: 20250728053455) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["supplier_id"], name: "index_products_on_supplier_id"
+  end
+
+  create_table "purchase_orders", force: :cascade do |t|
+    t.bigint "supplier_id"
+    t.string "status"
+    t.decimal "total_value"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["supplier_id"], name: "index_purchase_orders_on_supplier_id"
   end
 
   create_table "suppliers", force: :cascade do |t|
@@ -46,5 +65,8 @@ ActiveRecord::Schema.define(version: 20250728053455) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
+  add_foreign_key "line_items", "products"
+  add_foreign_key "line_items", "purchase_orders"
   add_foreign_key "products", "suppliers"
+  add_foreign_key "purchase_orders", "suppliers"
 end
